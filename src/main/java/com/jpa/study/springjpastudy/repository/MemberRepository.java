@@ -12,5 +12,7 @@ import com.jpa.study.springjpastudy.entity.Member;
 public interface MemberRepository extends JpaRepository<Member, String> {
     public Optional<Member> findById(String id);
 
+    public Optional<Member> findByUsername(String username);
+
     public List<Member> findAll();
 }

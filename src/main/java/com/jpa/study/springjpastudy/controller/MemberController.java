@@ -41,6 +41,13 @@ public class MemberController {
          Optional<Member> member = memberService.findById(id);
          return new ResponseEntity<Member>(member.get(), HttpStatus.OK);
      }
+
+     //유저이름으로 회원 조회
+     @GetMapping(value = "/name/{username}", produces = { MediaType.APPLICATION_JSON_VALUE })
+     public ResponseEntity<Member> getMemberByUsername(@PathVariable("username") String username) {
+         Optional<Member> member = memberService.findByUsername(username);
+         return new ResponseEntity<Member>(member.get(), HttpStatus.OK);
+     }
  
      // 회원번호로 회원 삭제
      @DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })

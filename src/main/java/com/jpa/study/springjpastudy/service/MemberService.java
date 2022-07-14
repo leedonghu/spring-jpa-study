@@ -45,4 +45,9 @@ public class MemberService {
             memberRepository.save(member);
         }
     }
+
+    public Optional<Member> findByUsername(String username){
+        Optional<Member> member = memberRepository.findByUsername(username);
+        return member;
+    }
 }

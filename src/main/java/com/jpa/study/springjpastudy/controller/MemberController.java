@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jpa.study.springjpastudy.entity.Member;
+// import com.jpa.study.springjpastudy.entity.Team;
 import com.jpa.study.springjpastudy.service.MemberService;
 
 @RestController
@@ -28,6 +29,19 @@ public class MemberController {
     @Autowired
     MemberService memberService;
 
+    @GetMapping(value = "/test/delete/team")
+    public void deleteTeam(){
+        memberService.deleteTeam();
+    }
+    @GetMapping(value = "/test/delete")
+    public void deleteRelation(){
+        memberService.deleteRelation();
+    }
+
+    @GetMapping(value = "/test/update")
+    public void updateRelation(){
+        memberService.updateRelation();
+    }
      // 모든 회원 조회
      @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
      public ResponseEntity<List<Member>> getAllmembers() {
@@ -37,7 +51,7 @@ public class MemberController {
  
      // 회원번호로 한명의 회원 조회
      @GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
-     public ResponseEntity<Member> getMember(@PathVariable("id") String id) {
+     public ResponseEntity<Member> getMember(@PathVariable("id") Long id) {
          Optional<Member> member = memberService.findById(id);
          return new ResponseEntity<Member>(member.get(), HttpStatus.OK);
      }
@@ -51,14 +65,14 @@ public class MemberController {
  
      // 회원번호로 회원 삭제
      @DeleteMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
-     public ResponseEntity<Void> deleteMember(@PathVariable("id") String id) {
+     public ResponseEntity<Void> deleteMember(@PathVariable("id") Long id) {
          memberService.deleteById(id);
          return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
      }
  
      // 회원번호로 회원 수정(mbrNo로 회원을 찾아 Member 객체의 id, name로 수정함)
      @PutMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
-     public ResponseEntity<Member> updateMember(@PathVariable("id") String id, Member member) {
+     public ResponseEntity<Member> updateMember(@PathVariable("id") Long id, Member member) {
          memberService.updateById(id, member);
          return new ResponseEntity<Member>(member, HttpStatus.OK);
      }
@@ -74,6 +88,19 @@ public class MemberController {
      public ResponseEntity<Member> save(HttpServletRequest req, Member member){
          return new ResponseEntity<Member>(memberService.save(member), HttpStatus.OK);
      }
+
+     @GetMapping(value = "/test/save")
+     public String testSave(){
+        memberService.testSave();
+        return "success";
+     }
+
+     @GetMapping(value = "/test/search")
+     public void testSearch(){
+        memberService.queryLogicJoin();
+     }
+
+
 
      @GetMapping("/test")
      public String test(){

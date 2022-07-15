@@ -3,6 +3,8 @@ package com.jpa.study.springjpastudy;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
+
 @SpringBootApplication
 public class SpringJpaStudyApplication {
 
@@ -10,4 +12,6 @@ public class SpringJpaStudyApplication {
 		SpringApplication.run(SpringJpaStudyApplication.class, args);
 	}
 
+
+	
 }

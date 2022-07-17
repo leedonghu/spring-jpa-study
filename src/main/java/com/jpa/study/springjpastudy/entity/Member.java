@@ -12,19 +12,19 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
+// import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.TableGenerator;
+// import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import lombok.Getter;
-import lombok.Setter;
+
 
 @Entity //클래스를 테이블과 매핑한다고 JPA에 알려줌
 @Table(name = "MEMBER") //매핑할 테이블 정보를 알려줌
 @Getter
-@Setter
+
 public class Member {
     
     @Id //PK에 매핑
@@ -54,6 +54,27 @@ public class Member {
 
     @Lob //필드의 길이제한이 없음, VARCHAR타입 대신에 CLOB타입으로 저장
     private String description;
+
+    public void setTeam(Team team){
+        
+        if(this.team != null){
+            this.team.getMembers().remove(this);
+        }
+        this.team = team;
+        team.getMembers().add(this);
+    }
+
+    public void setId(Long id){
+        this.id = id;
+    }
+
+    public void setAge(int age){
+        this.age = age;
+    }
+
+    public void setUsername(String username){
+        this.username = username;
+    }
 }
 
 

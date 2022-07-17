@@ -1,17 +1,21 @@
 package com.jpa.study.springjpastudy.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
-import lombok.Setter;
+// import lombok.Setter;
 
 @Entity 
 @Table(name = "TEAM") 
 @Getter
-@Setter
+
 public class Team {
     
     @Id
@@ -19,6 +23,10 @@ public class Team {
     private String tid;
 
     private String name;
+
+    @OneToMany(mappedBy = "team")//양방향 매핑일때 반대쪽 매핑의 필드 이름 값
+    private List<Member> members = new ArrayList<>();
+
 
     public Team(){
 

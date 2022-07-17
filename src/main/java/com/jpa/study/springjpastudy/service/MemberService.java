@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,17 @@ public class MemberService {
 
     @Autowired
     private TeamRepository teamRepository;
+    
+    @Transactional
+    public void biDirection(){
+        Optional<Team> a = teamRepository.findById("team1");
+        Team team = a.get();
+        List<Member>members = team.getMembers();
+        for(Member member : members){
+            System.out.println(member.getUsername());
+        }
+    }
+
 
     public void deleteTeam(){
         Optional<Member> a = memberRepository.findById(1l);

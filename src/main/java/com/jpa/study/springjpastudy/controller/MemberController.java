@@ -29,6 +29,11 @@ public class MemberController {
     @Autowired
     MemberService memberService;
 
+    @GetMapping("/test/bi")
+    public void biDirection(){
+        memberService.biDirection();
+    }
+
     @GetMapping(value = "/test/delete/team")
     public void deleteTeam(){
         memberService.deleteTeam();

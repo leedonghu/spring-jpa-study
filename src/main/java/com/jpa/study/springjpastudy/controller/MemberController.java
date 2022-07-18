@@ -29,6 +29,25 @@ public class MemberController {
     @Autowired
     MemberService memberService;
 
+    @GetMapping("/test/connect")
+    public void connect(){
+        memberService.connetEntity();
+    }
+    @GetMapping("/test/many")
+    public void many(){
+        memberService.ManyToMany();
+    }
+
+    @GetMapping("/test/many/find")
+    public void manyFind(){
+        memberService.manyFind();;
+    }
+
+    @GetMapping("/test/oneToMany")
+    public void oneToMany(){
+        memberService.oneToMany();
+    }
+
     @GetMapping("/test/bi")
     public void biDirection(){
         memberService.biDirection();
@@ -102,7 +121,7 @@ public class MemberController {
 
      @GetMapping(value = "/test/search")
      public void testSearch(){
-        memberService.queryLogicJoin();
+        // memberService.queryLogicJoin();
      }
 
 

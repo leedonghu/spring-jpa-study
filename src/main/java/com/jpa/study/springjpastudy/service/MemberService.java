@@ -10,8 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jpa.study.springjpastudy.entity.Member;
+import com.jpa.study.springjpastudy.entity.Order;
+import com.jpa.study.springjpastudy.entity.Product;
 import com.jpa.study.springjpastudy.entity.Team;
+import com.jpa.study.springjpastudy.repository.MemberProductRepository;
 import com.jpa.study.springjpastudy.repository.MemberRepository;
+import com.jpa.study.springjpastudy.repository.OrderRepository;
+import com.jpa.study.springjpastudy.repository.ProductRepository;
 import com.jpa.study.springjpastudy.repository.TeamRepository;
 
 @Service
@@ -22,7 +27,74 @@ public class MemberService {
 
     @Autowired
     private TeamRepository teamRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
+
+    @Autowired
+    private MemberProductRepository memberProductRepository;
+
+    @Autowired
+    private OrderRepository orderRepository;
     
+    @Transactional
+    public void connetEntity(){
+        Product productA = new Product();
+        productA.setId("productA");
+        productA.setName("상품A");
+        productRepository.save(productA);
+
+        Member member1 = new Member();
+        member1.setUsername("회원1");
+        
+        memberRepository.save(member1);
+
+        Order order = new Order();
+        order.setOrderAmount(2);
+        order.setMember(member1);
+        order.setProduct(productA);
+        orderRepository.save(order);
+    }
+
+    @Transactional
+    public void ManyToMany(){
+        Product productA = new Product();
+        productA.setId("productB");
+        productA.setName("상품B");
+        productRepository.save(productA);
+
+        Member member1 = new Member();
+        member1.setUsername("회원2");
+        member1.getProducts().add(productA);
+        memberRepository.save(member1);
+    }
+
+    @Transactional
+    public void manyFind(){
+        Optional<Member> a = memberRepository.findByUsername("회원2");
+        Member member = a.get();
+        List<Product> products = member.getProducts(); //객체 그래프 탐색
+        for(Product product : products){
+            System.out.println(product.getName());
+        }
+    }
+
+    @Transactional
+    public void oneToMany(){
+        Member member1 = new Member();
+        Member member2 = new Member();
+        member1.setId(1l);
+        member2.setId(2l);
+
+        Team team1 = new Team();
+        team1.setTid("team1");
+        team1.getMembers().add(member1);
+        team1.getMembers().add(member2);
+
+        memberRepository.save(member1);
+        memberRepository.save(member2);
+        teamRepository.save(team1);
+    }
     @Transactional
     public void biDirection(){
         Optional<Team> a = teamRepository.findById("team1");
@@ -103,7 +175,7 @@ public class MemberService {
         Member member1 = new Member();
         member1.setId(1l);
         member1.setUsername("회원1");
-        member1.setTeam(team1);
+        // member1.setTeam(team1);
         memberRepository.save(member1);
 
         //회원2 저장

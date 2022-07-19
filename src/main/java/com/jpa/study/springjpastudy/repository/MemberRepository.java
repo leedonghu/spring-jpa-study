@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.jpa.study.springjpastudy.entity.Member;
+import com.jpa.study.springjpastudy.entity.ch6.Member;
 
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {

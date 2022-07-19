@@ -1,4 +1,4 @@
-package com.jpa.study.springjpastudy.entity;
+package com.jpa.study.springjpastudy.entity.ch6;
 
 import java.util.ArrayList;
 import java.util.Date;

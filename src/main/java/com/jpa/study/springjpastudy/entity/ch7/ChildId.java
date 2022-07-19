@@ -1,11 +1,11 @@
-package com.jpa.study.springjpastudy.entity;
+package com.jpa.study.springjpastudy.entity.ch7;
 
 import java.io.Serializable;
 
-public class MemberProductId implements Serializable {
+public class ChildId implements Serializable{
     
-    private Long member;
-    private String product;
+    private String parent; //Child.parent 매핑
+    private String ChildId; //Child.childId 매핑
 
     @Override
     public boolean equals(Object obj) {

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jpa.study.springjpastudy.entity.Member;
+import com.jpa.study.springjpastudy.entity.ch6.Member;
 // import com.jpa.study.springjpastudy.entity.Team;
 import com.jpa.study.springjpastudy.service.MemberService;
 

@@ -9,10 +9,10 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jpa.study.springjpastudy.entity.Member;
-import com.jpa.study.springjpastudy.entity.Order;
-import com.jpa.study.springjpastudy.entity.Product;
-import com.jpa.study.springjpastudy.entity.Team;
+import com.jpa.study.springjpastudy.entity.ch6.Member;
+import com.jpa.study.springjpastudy.entity.ch6.Order;
+import com.jpa.study.springjpastudy.entity.ch6.Product;
+import com.jpa.study.springjpastudy.entity.ch6.Team;
 import com.jpa.study.springjpastudy.repository.MemberProductRepository;
 import com.jpa.study.springjpastudy.repository.MemberRepository;
 import com.jpa.study.springjpastudy.repository.OrderRepository;

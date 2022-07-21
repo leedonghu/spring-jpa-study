@@ -29,6 +29,14 @@ public class MemberController {
     @Autowired
     MemberService memberService;
 
+    @GetMapping("/test/eager/save")
+    public void eagerSave(){
+        memberService.eagerSave();
+    }
+    @GetMapping("/test/eager")
+    public void eager(){
+        memberService.eager();
+    }
     @GetMapping("/test/connect")
     public void connect(){
         memberService.connetEntity();

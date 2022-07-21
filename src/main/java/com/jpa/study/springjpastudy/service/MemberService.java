@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +16,9 @@ import com.jpa.study.springjpastudy.entity.ch6.Member;
 import com.jpa.study.springjpastudy.entity.ch6.Order;
 import com.jpa.study.springjpastudy.entity.ch6.Product;
 import com.jpa.study.springjpastudy.entity.ch6.Team;
-import com.jpa.study.springjpastudy.repository.MemberProductRepository;
+import com.jpa.study.springjpastudy.entity.ch8.Member8;
+import com.jpa.study.springjpastudy.entity.ch8.Team8;
+
 import com.jpa.study.springjpastudy.repository.MemberRepository;
 import com.jpa.study.springjpastudy.repository.OrderRepository;
 import com.jpa.study.springjpastudy.repository.ProductRepository;
@@ -21,7 +26,9 @@ import com.jpa.study.springjpastudy.repository.TeamRepository;
 
 @Service
 public class MemberService {
-    
+    @Autowired
+    private EntityManagerFactory ef;
+
     @Autowired
     private MemberRepository memberRepository;
 
@@ -31,12 +38,37 @@ public class MemberService {
     @Autowired
     private ProductRepository productRepository;
 
-    @Autowired
-    private MemberProductRepository memberProductRepository;
+    
 
     @Autowired
     private OrderRepository orderRepository;
     
+    public void eagerSave(){
+        EntityManager em = ef.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        et.begin();
+        Team8 team = new Team8();
+        team.setId("team1");
+        team.setName("team1");
+        em.persist(team);
+        Member8 member = new Member8();
+        member.setId("member1");
+        member.setUsername("lee");
+        member.setTeam(team);
+        em.persist(member);
+        et.commit();
+        
+        em.close();
+
+    }
+
+    public void eager(){
+        EntityManager em = ef.createEntityManager();
+        Member8 member = em.find(Member8.class, "member1");
+        Team8 team = member.getTeam();
+        System.out.println(team.getName());
+    }
+
     @Transactional
     public void connetEntity(){
         Product productA = new Product();

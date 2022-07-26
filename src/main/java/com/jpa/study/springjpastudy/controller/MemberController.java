@@ -29,6 +29,28 @@ public class MemberController {
     @Autowired
     MemberService memberService;
 
+    @GetMapping("test/revice")
+    public void revice(){
+        memberService.revice();
+    }
+    @GetMapping("/test/copy")
+    public void copy() throws CloneNotSupportedException{
+        memberService.copy();
+        memberService.copy2();
+    }
+
+    @GetMapping("/test/colLazy")
+    public void colLazy(){
+        memberService.colLazy();
+    }
+    @GetMapping("/test/col")
+    public void col(){
+        memberService.col();
+    }
+    @GetMapping("/test/emb")
+    public void embedded(){
+        memberService.embedded();
+    }
     @GetMapping("/test/eager/save")
     public void eagerSave(){
         memberService.eagerSave();
